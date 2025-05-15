@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>rd_kate's Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.39.0/tabler-icons.min.css" rel="stylesheet" />
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family:'Quicksand',sans-serif;
+      background:#0e0d0d;
+      display:flex;justify-content:center;align-items:center;
+      height:100vh;overflow:hidden;position:relative;color:#fbe9e9;
+    }
+    /* Grid-aligned overlay images */
+    #image-overlay {
+      position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;
+    }
+    #image-overlay img {
+      position:absolute;opacity:0.8;transition:transform 0.5s;
+    }
+    @media (max-width:640px) {
+      #image-overlay img { max-width:50px; }
+    }
+    /* Card styling */
+    .card {
+      opacity:0;transform:scale(0.9);
+      background:#fff8f0cc;border:2px solid #dfc7be;border-radius:1rem;
+      box-shadow:0 8px 32px rgba(223,199,190,0.5);
+      width:350px;padding-bottom:1rem;color:#b33264;
+      position:relative;z-index:10;transition:box-shadow .3s;
+    }
+    .card:hover { box-shadow:0 12px 50px rgba(219,127,163,0.8); }
+    .card:active { animation:shatter .4s ease forwards; }
+    @keyframes shatter { 0%{transform:scale(1)}50%{transform:scale(1.05)rotate(2deg)}100%{transform:scale(0.98)rotate(-2deg)} }
+    /* Star background canvas */
+    #bg-canvas { position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none; }
+    .avatar-wrapper {
+      width:160px;height:176px;margin:1.5rem auto 0;
+      border:4px solid #bfa79c;border-radius:12px;
+      box-shadow:0 6px 14px rgba(191,167,156,0.6);overflow:hidden;
+    }
+    .avatar-wrapper img { width:100%;height:100%;object-fit:cover; }
+    h1 { font-size:3rem;font-weight:700;text-align:center;color:#b33264;text-shadow:0 0 8px rgba(227,163,183,0.8);margin-top:1rem;letter-spacing:.05em }
+    p { margin-top:.5rem;font-size:1rem;line-height:1.4;text-align:center;color:#b38888;text-shadow:0 0 4px rgba(227,163,183,0.8) }
+    .social-bar { position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;gap:2rem;z-index:20 }
+    .discord-icon i { font-size:2.4rem;color:#db7fa3;text-shadow:0 0 10px rgba(219,127,163,0.7);transition:all .3s }
+    .discord-icon:hover i { color:#ffaddd;text-shadow:0 0 20px rgba(255,173,221,0.8);transform:scale(1.1) }
+    .roblox-icon img { width:3rem;height:3rem;filter:drop-shadow(0 0 5px #e14e9a);transition:all .3s }
+    .roblox-icon:hover img { transform:scale(1.2);filter:drop-shadow(0 0 15px rgba(225,78,154,0.8)) }
+    #music-toggle { position:fixed;top:1.2rem;right:1.2rem;width:44px;height:44px;background:#db7fa3cc;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px #db7fa3cc;cursor:pointer;z-index:20;transition:background .3s }
+    #music-toggle:hover { background:#ffadddcc }
+    #music-toggle svg { fill:white;width:24px;height:24px }
+    .glow-heading { position:fixed;top:1rem;left:50%;transform:translateX(-50%);font-size:1.6rem;font-weight:700;color:#db7fa3;text-shadow:0 0 5px #db7fa3,0 0 15px #ffb6d6,0 0 25px #ffb6d6,0 0 40px #ffb6d6;letter-spacing:.15em;z-index:20;pointer-events:none }
+  </style>
+</head>
+<body>
+  <canvas id="bg-canvas"></canvas>
+  <div id="image-overlay"></div>
+  <div class="glow-heading" aria-hidden="true">⋆｡ﾟ☁︎｡⋆｡ 𝓻𝓭_𝓴𝓪𝓽𝓮 ｡⋆｡☁︎ﾟ｡⋆</div>
+  <div class="card" data-tilt data-tilt-max="15" data-tilt-speed="500" data-tilt-perspective="1500">
+    <div class="avatar-wrapper" aria-hidden="true"><img src="https://cdn.discordapp.com/avatars/1256299227798306819/acc2f2621f2ecb863081cfc5a1cfef94?size=1024" alt="avatar" /></div>
+    <h1>rd_kate</h1>
+    <p>Lover of vintage, cozy vibes 🕯️💌<br/>୨ৎ 𓈒 I've got my eyes
+                           <br/>oN you ᰔ  ,  ! </p>
+  </div>
+  <div class="social-bar" aria-label="Social media links">
+    <a href="https://discord.com/users/1256299227798306819" class="discord-icon" aria-label="Discord" target="_blank" rel="noopener"><i class="ti ti-brand-discord"></i></a>
+    <a href="https://www.roblox.com/users/kavyakovya/profile" class="roblox-icon" aria-label="Roblox" target="_blank" rel="noopener"><img src="https://cdn.discordapp.com/attachments/1351872297337622582/1372472554245066824/CITYPNG.COMHD_Roblox_White_Symbol_Sign_Icon_Logo_PNG_-_2000x2000.png" alt="Roblox" /></a>
+  </div>
+  <button id="music-toggle" aria-pressed="false" aria-label="Toggle music"><svg viewBox="0 0 24 24"><path d="M5 9v6h4l5 5V4L9 9H5z"/></svg></button>
+  <audio id="bg-music" loop><source src="https://cdn.pixabay.com/download/audio/2022/10/22/audio_46f94a1b24.mp3?filename=relaxing-lofi-melody-11050.mp3" type="audio/mpeg" /></audio>
+  <script>
+    // Overlay grid layout
+    const overlay = document.getElementById('image-overlay');
+    const imgs = [
+      'https://i.pinimg.com/736x/af/b3/44/afb344783583ab15cb904bf2addd866f.jpg',
+      'https://i.pinimg.com/736x/91/d1/7b/91d17bfe32646da0bfebdafd44e2c408.jpg',
+      'https://i.pinimg.com/736x/68/49/15/6849159a564d94121b0bc436850cea95.jpg',
+      'https://i.pinimg.com/736x/05/32/0f/05320f72e3b5488e00fbc70caa8bf62f.jpg',
+      'https://i.pinimg.com/736x/45/db/e3/45dbe3550c39f89106842be164827fe9.jpg',
+      'https://i.pinimg.com/736x/3c/04/21/3c0421cfbac14c9a2d652ccf06bca3f9.jpg'
+    ];
+    const count = window.innerWidth < 640 ? 6 : 12;
+    const cols = window.innerWidth < 640 ? 3 : 4;
+    const rows = Math.ceil(count / cols);
+    for (let i = 0; i < count; i++) {
+      const img = document.createElement('img');
+      img.src = imgs[i % imgs.length];
+      const cellWidth = 100 / cols;
+      const cellHeight = 100 / rows;
+      const col = i % cols;
+      const row = Math.floor(i / cols);
+      const jitterX = Math.random() * cellWidth * 0.4;
+      const jitterY = Math.random() * cellHeight * 0.4;
+      img.style.width = (window.innerWidth < 640 ? 50 : 80) + 'px';
+      img.style.top = (row * cellHeight + jitterY) + '%';
+      img.style.left = (col * cellWidth + jitterX) + '%';
+      img.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+      overlay.appendChild(img);
+    }
+    window.addEventListener('resize', () => { overlay.innerHTML = ''; location.reload(); });
+
+    // VanillaTilt init
+    VanillaTilt.init(document.querySelectorAll('.card'), { max:15, speed:500, perspective:1500, glare:true, 'max-glare':0.2, gyroscope:true });
+    // Entry anime
+    anime({ targets:'.card', opacity:[0,1], scale:[0.9,1], duration:1600, easing:'easeOutExpo' });
+    // Shatter on click
+    document.querySelector('.card').addEventListener('click', () => {
+      anime({ targets:'.card', scale:[1,1.05,0.98], rotate:[0,2,-2], duration:400, easing:'easeInOutSine' });
+    });
+    // Music
+    const btn = document.getElementById('music-toggle'); const aud = document.getElementById('bg-music');
+    btn.addEventListener('click', () => { if(aud.paused){aud.play();btn.style.background='#ffadddcc'}else{aud.pause();btn.style.background='#db7fa3cc'} });
+    // Stars & sparkles
+    const canvas = document.getElementById('bg-canvas'); const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1,1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha:true }); renderer.setSize(window.innerWidth, window.innerHeight);
+    const stars=[]; const geo=new THREE.SphereGeometry(0.08,12,12); const mat=new THREE.MeshBasicMaterial({ color:0xffa3c8 });
+    for(let i=0;i<600;i++){ const s=new THREE.Mesh(geo,mat.clone()); s.position.set((Math.random()-0.5)*150,(Math.random()-0.5)*150,(Math.random()-0.5)*150); scene.add(s); stars.push(s); }
+    camera.position.z=10; (function animate(){ requestAnimationFrame(animate); stars.forEach(s=>{s.rotation.x+=0.001; s.rotation.y+=0.001}); renderer.render(scene,camera);}());
+    window.addEventListener('resize',()=>{ camera.aspect=window.innerWidth/window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth,window.innerHeight); });
+    canvas.style.pointerEvents='auto'; canvas.addEventListener('click',e=>{ const g=new THREE.SphereGeometry(0.15,8,8); const m=new THREE.MeshBasicMaterial({ color:0xffd6e8,transparent:true}); const sp=new THREE.Mesh(g,m); const x=(e.clientX/window.innerWidth)*2-1; const y=-(e.clientY/window.innerHeight)*2+1; sp.position.set(x*15,y*15,0); scene.add(sp); let op=1,sc=1; (function f(){ op-=0.03; sc+=0.07; sp.material.opacity=op; sp.scale.set(sc,sc,sc); if(op<=0){ scene.remove(sp); sp.geometry.dispose(); sp.material.dispose(); } else requestAnimationFrame(f);}()); });
+  </script>
+</body>
+</html>
